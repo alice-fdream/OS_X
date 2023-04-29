@@ -1,0 +1,63 @@
+local a = ...
+_G._OSVERSION = "lampOS"
+local component = component
+local computer = computer
+local unicode = unicode
+local b, c = "S", computer.shutdown
+computer.runlevel = function()
+    return b
+end
+computer.shutdown = function(d)
+    b = d and 6 or 0
+    if os.sleep then
+        computer.pushSignal("shutdown")
+        os.sleep(0.1)
+    end
+    c(d)
+end
+local e = function(f)
+    return a(f)
+end
+local function g(f)
+    local h, i = e(f)
+    if h then
+        local j = table.pack(pcall(h))
+        if j[1] then
+            return table.unpack(j, 2, j.n)
+        else
+            error(j[2])
+        end
+    else
+        error(i)
+    end
+end
+local k = g("/OS/Library/package.lua")
+do
+    _G.component = nil
+    _G.computer = nil
+    _G.process = nil
+    _G.unicode = nil
+    _G.package = k
+    k.loaded.component = component
+    k.loaded.computer = computer
+    k.loaded.unicode = unicode
+    k.loaded.buffer = g("/OS/Library/buffer.lua")
+    k.loaded.filesystem = g("/OS/Library/filesystem.lua")
+    _G.io = e("/OS/Library/io.lua")()
+end
+require("filesystem").mount(computer.getBootAddress(), "/")
+k.preload = {}
+local function l(m, ...)
+    return component.invoke(computer.getBootAddress(), m, ...)
+end
+g("/OS/Drivers")
+for n, o in component.list() do
+    computer.pushSignal("component_added", n, o)
+end
+computer.pushSignal("init")
+require("event").pull(1, "init")
+_G.runlevel = 1
+g("/OS/Bootstat")
+
+
+

@@ -1,0 +1,23 @@
+{
+	main = {
+		name = "Файловый менеджер",
+		description = "Files Manager of OS X",
+		author = "Alice Vinogradova",
+		version = "1.0",
+		kind = "System"
+	},
+	
+	safeness = {
+		sign_key = "96dff441a453dada5c1481e221a93c46"
+	},
+	
+	compatibility = {
+		type_program = "GUI"
+	},
+	
+	BFI = {
+		file = "Main.lua",
+		icon = "Icon.pic"	
+	}
+	
+}

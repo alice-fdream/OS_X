@@ -1,0 +1,1 @@
+do local a,b=computer.getBootAddress(),component.invoke;local function c(d)local e=assert(b(a,"open",d))local f=""repeat local g=b(a,"read",e,math.huge)f=f..(g or"")until not g;b(a,"close",e)return load(f,"="..d,"bt",_G)end;c("/OS/Kernel")(c)end

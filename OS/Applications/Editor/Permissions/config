@@ -1,0 +1,23 @@
+{
+	main = {
+		name = "Текстовый редактор",
+		description = "Text Editor of OS X",
+		author = "Alice Vinogradova",
+		version = "1.0",
+		kind = "System"
+	},
+	
+	safeness = {
+		sign_key = "30835a3c34727d3bb2f96054de787d61"
+	},
+	
+	compatibility = {
+		type_program = "GUI"
+	},
+	
+	BFI = {
+		file = "Main.lua",
+		icon = "Icon.pic"	
+	}
+	
+}

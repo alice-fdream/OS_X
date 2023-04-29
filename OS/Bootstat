@@ -1,0 +1,18 @@
+local buffer = require("NyaDraw")
+local GUI = require("GUI")
+local computer = require("computer")
+------------------------------------------------------------------------------------------
+buffer.setGPUProxy(require("component").gpu)
+
+local start = coroutine.create(function ()
+	local startfile = "/OS/GUI/Desktop/Main.lua"
+	local result, reason = loadfile(startfile)
+	if result then
+    	result, reason = pcall(result)
+    	if not result then
+    		GUI.alert(reason)
+    	end
+	end
+end)
+
+coroutine.resume(start)
